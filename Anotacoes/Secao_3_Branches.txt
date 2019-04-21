@@ -1,0 +1,58 @@
+=================================================================================================
+SEÇÃO 3 - BRANCHES
+=================================================================================================
+--------------------------------------------------------------------------------------
+CRIANDO UMA BRANCH
+--------------------------------------------------------------------------------------
+Comando: git branch [nome da branch];
+
+Criar Branch e já entrar nela: git checkout -b [nome da branch]
+
+Comando pra visualizar as Branches: git branch;
+
+Mudar de Branch: git checkout [nome da branch];
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+Realizando Merge
+--------------------------------------------------------------------------------------
+- Fazemos o merge estando na sempre ma branch Master (git checkout master)
+
+Comando pra fazer MERGE: git merge [nome da branch pra fazer a junção];
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+Visualizando LOGs graficamente
+--------------------------------------------------------------------------------------
+Comando: git log --graph OU git log --graph --oneline
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+Excluindo uma Branch
+--------------------------------------------------------------------------------------
+Comando: git branch -d [nome da branch]
+--------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------
+Cenários de Merge
+---------------------------------------------------------------------------------------
+FAST FORWARD -> Ocorre quando as modificações de projeto ocorrem apenas nas branchs, 
+				ou seja, os arquivos alterados numa branch x não sofreram modificação
+				na branch MASTER, de modo que o git simplesmente junta as modificações
+				na MASTER como se essas nunca tivessem sido feitas na branch x.
+				
+RECURSIVE ->    Ocorre quando houve modificações tanto na branch MASTER quanto na 
+				branch X, porém em arquivos distintos, não gerando conflitos. Se
+				dermos git log na MASTER, veremos que foi feito a junção dos arquivos
+				das duas branchs (MASTER e branch X), ou seja, teremos no log os 
+				commits dessas, além de um commit final chamado de "Merge", o qual
+				indica que o GIT realizou um merge da Branch X pra MASTER. Esse 
+				commit chamado MERGE terá dois pais: o último commit da MASTER e o 
+				último commit da branch X.
+
+CONFLITOS ->	Ocorre quando há mudanças num mesmo arquivo tanto na MASTER quanto
+				numa branch x, de modo que o GIT não consegue resolver qual alteração
+				é a correta. Para visualizarmos quais arquivos estão em conflito, basta
+				darmos o comando GIT STATUS. Para resolvermos o conflito, basta
+				alterarmos os arquivos indicando quais linhas queremos que façam parte
+				do commit. Após isso, basta darmos o comando GIT COMMIT -M "".

@@ -1,0 +1,28 @@
+======================================================================================================
+Commit Local (Depois de ter dado o git clone [url do repositorio])
+======================================================================================================
+	1 - git add index.html
+	2 - git status <- Opcional
+	3 - git commit -m "Arquivo index.html criado"
+------------------------------------------------------------------------------------------------------
+Comando Alternativo
+------------------------------------------------------------------------------------------------------
+git remote add origin https://github.com/user/repo.git
+======================================================================================================
+Sincronizar alterações no repositório (git push)
+======================================================================================================
+Caso dê erro de permissão, usar um user válido para dar push:
+	1 - git config user.name [nome]
+	2 - git config user.email [e-mail]
+======================================================================================================
+Atualizando o projeto local com o comando git pull
+======================================================================================================
+	1 - git pull (Sincroniza o repositório local com o repositório web)
+	2 - git log (Opcional - Possibilita observar todos os commits que foram realizados até o momento).
+
+	
+	
+***************************************************************************************************************
+IMPORTANTE
+***************************************************************************************************************
+Aperte a tecla q para encerrar a ação de log.
