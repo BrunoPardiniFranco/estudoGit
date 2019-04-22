@@ -1,0 +1,54 @@
+===============================================================================
+ISSUES - Ferramenta para manter histórico de alterações do Projeto
+===============================================================================
+-------------------------------------------------------------------------------
+APLICABILIDADE DAS ISSUES
+-------------------------------------------------------------------------------
+Criamos ISSUES para os seguintes fins:
+
+    .   Rastreio de bugs - O GitHub mantém o histórico de todos os commits
+        relacionados à uma determinada ISSUE, de modo que podemos gravar o
+        histórico de alteraçoes do projeto para a resolução de um bug.
+    
+    .   Sugestão de Features - Criamos ISSUES para manter o histórico das
+        alterações do projeto para o desenvolvimento de uma feature.
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+BRANCHES REMOTAS
+-------------------------------------------------------------------------------
+Um bom uso das branches remotas é usá-las para cada uma das ISSUE do Projeto,
+de modo que as nossas alterações não afetem a branch MASTER do mesmo, assim,
+cada membro da equipe fica responsável por desenvolver a resolução da ISSUE,
+realizando o fluxo padrão de trabalho - commitando as suas alterações no repo-
+sitório do projeto -, e no final, realizar o merge das suas alterações na
+MASTER sem impactar o desenvolvimento das outras ISSUES - as quais estarão em
+desenvolvimento em outras branches.
+
+Criar BRANCH REMOTA: É o mesmo comando pra cria uma branch local: 
+git branch [nome da branch]. 
+
+A diferença é que na hora de enviarmos o commit para o repositório remoto, 
+devemos usar o seguinte comando:
+
+git push [repositorio-destino*] [nome da branch]
+
+Caso seja o próprio repositório que clonamos, basta escrever origin:
+git push origin [nome da branch]
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+REFERENCIANDO UM COMMIT À UMA ISSUE
+-------------------------------------------------------------------------------
+Quano formos realizar o commit, devemos podemos relacioná-lo à uma ISSUE co-
+locando a sua identificação na mensagem (# ID da ISSUE):
+
+git commit -m "Commit da issue 2 #2"
+
+Caso quisermo fechar uma ISSUE quando darmos um commit de resolução final, pode-
+mos colocar na mensagem as palavras reservadas CLOSES ou + o ID da ISSUE:
+
+git commit -m "Resolucao da ISSUE 2 closes #2"
+
+git commit -m "Resolucao da ISSUE 2 fixes #2"
+-------------------------------------------------------------------------------
