@@ -21,7 +21,7 @@ Um bom uso das branches remotas é usá-las para cada uma das ISSUE do Projeto,
 de modo que as nossas alterações não afetem a branch MASTER do mesmo, assim,
 cada membro da equipe fica responsável por desenvolver a resolução da ISSUE,
 realizando o fluxo padrão de trabalho - commitando as suas alterações no repo-
-sitório do projeto -, e no final, realizar o merge das suas alterações na
+sitório do projeto -, e, no final, realizar o merge das suas alterações na
 MASTER sem impactar o desenvolvimento das outras ISSUES - as quais estarão em
 desenvolvimento em outras branches.
 
@@ -40,8 +40,8 @@ git push origin [nome da branch]
 -------------------------------------------------------------------------------
 REFERENCIANDO UM COMMIT À UMA ISSUE
 -------------------------------------------------------------------------------
-Quano formos realizar o commit, devemos podemos relacioná-lo à uma ISSUE co-
-locando a sua identificação na mensagem (# ID da ISSUE):
+Quano formos realizar o commit, podemos relacioná-lo à uma ISSUE colocando a 
+sua identificação na mensagem (# ID da ISSUE):
 
 git commit -m "Commit da issue 2 #2"
 

@@ -1,0 +1,175 @@
+*=============================================================================*
+CHECKOUT E RESET
+===============================================================================
+*-----------------------------------------------------------------------------*
+Desfazendo Ações
+-------------------------------------------------------------------------------
+- Preocauções: Cuidado ao resetar ações em uma branch compartilhada com outros
+usuários, pois com esses comandos vamos modificar o PROJECT HISTORY.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+Desfazendo Ações mesmo tendo salvo o arquivo
+-------------------------------------------------------------------------------
+Ao modificar um arquivo, podemos desfazer esta ação mesmo já tendo salvo as 
+alterações na nossa máquina (fazendo isso, perdemos os dados do arquivos). Para 
+isso, devemos usar o seguinte comando:
+
+git checkout [nome do arquivo]
+
+EXEMPLO:
+    git checkout a.txt
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+CONCEITO DE HEAD
+-------------------------------------------------------------------------------
+A palavra HEAD pode ser abstraída como um ponteiro que indica ao qual commit
+estamos numa determinada BRANCH, ou seja, ela nos aponta a nossa posição no 
+PROJECT HISTORY.
+
+Por padrão, a HEAD está sempre apontando pro último commit do PROJECT HISTORY,
+porém, podemos mover a nossa HEAD pelos commits do nosso projeto.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REMOVENDO UMA MODIFICAÇÃO NA STAGE
+-------------------------------------------------------------------------------
+Após incluirmos um ou mais arquivos na stage, podemos desfazer esta ação com
+o seguinte comando:
+
+git reset HEAD [nome do arquivo]
+
+EXEMPLO:
+    git reset HEAD a.txt
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+DESFAZENDO O COMMIT
+-------------------------------------------------------------------------------
+Se voltarmos a HEAD um passo atrás, ou seja, voltarmos um commit no nosso PRO-
+JECT HISTORY, podemos descartar o último commit.
+
+Verficando de forma resumida qual commit a HEAD está apontando:
+    git log --oneline
+
+Movendo a HEAD no PROJECT HISTORY(a quantidade de ^ indica quantos passos vamos
+voltar no PROJECT HISTORY):
+    git reset head^
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REMOVENDO O RASTREIO DE UM ARQUIVO
+-------------------------------------------------------------------------------
+Quando fazemos esta ação, estamos dizendo ao GIT para que ele não realize mais
+o rastreamento do arquivo à partir desse momento.
+
+Comandos:
+    git rm --cached [nome do arquivo]
+
+***Pra desfazer este comando basta dar o git reset: git reset head [arquivo]***
+
+Após esse comando, ao darmos o git commit, à partir desse momento, o arquivo
+não é mais rastreado, ou seja, todas as alterações que realizarmos nele serão
+descartadas pelo GIT. Nessa ação não eliminamos os rastreios anteriores desse
+arquivo.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+VOLTANDO EM UM COMMIT DO PROJECT HISTORY
+-------------------------------------------------------------------------------
+Comando:
+    git checkout [hash do commit]
+
+EXEMPLO:
+    git checkout 33e7ec872fd0d5b5ad611e7339c918e2f65d3849
+
+Ao dar este comando, a nossa HEAD vai apontar para esse commit.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+Apagar os commits do PROJECT HISTORY
+-------------------------------------------------------------------------------
+Com o comando a seguir, vamos selecionar o hash de um dos commits do PROJECT
+HISTORY, de modo que todos os commits após o selecionado serão descartados, ou
+seja, vai apagar tudo oq aconteceu nestes.
+
+Comando: git reset --hard [hash do commit selecionado]
+
+EXEMPLO:
+    git reset --hard 33e7ec872fd0d5b5ad611e7339c918e2f65d3849
+
+RESULTADO:
+    Todos os commits (incluindo o que aconteceu em cada um deles) após o sele-
+    cionado acima serão descartados do PROJECT HISTORY
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+COMANDOS E COMO RESETÁ-LOS
+-------------------------------------------------------------------------------
+----------------------------------------------------------------------------
+|AÇÃO                                                         DESFAZER AÇÃO|
+|--------------------------------------------------------------------------|
+|arquivo salvo-------------------------------git checkout [nome do arquivo]|
+|git add-------------------------------------git reset head [arquivo]      |
+|git commit----------------------------------git reset head^               |
+|git rm --cached [nome do arquivo]-----------git reset head [arquivo]      |
+|--------------------------------------------------------------------------|
+-------------------------------------------------------------------------------
+===============================================================================
+
+*=============================================================================*
+FORK E SINCRONIA DE REPOSITÓRIOS
+===============================================================================
+*-----------------------------------------------------------------------------*
+CONCEITO DE FORK
+-------------------------------------------------------------------------------
+FORK envolve as tecnologias GIT e GITHUB em que podemos fazer uma cópia (clone
+de um repositório público qualquer) direto para o nosso repositório. 
+
+Isto nos permite experimentar alterações nesse clone de projeto sem alterar o 
+projeto original.
+
+Uma vez feita a cópia, as alterações nesses dois projetos são assíncronas, ou
+seja, as alterações do PROJECT HISTORY do UPSTREAM* um não vão se manifestar
+no PROJECT HISTORY da cópia (FORK) e vice-versa.
+
+*UPSTREAM -> Repositório Original
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+SINCRONIA ENTRE UPSTREAM E FORK
+-------------------------------------------------------------------------------
+1 - FAÇA O FORK DE UM PROJETO PÚBLICO;
+
+2 - FAÇA UM CLONE (GIT CLONE) DO SEU FORK PARA UM REPOSITÓRIO LOCAL;
+
+3 - NO REPOSITÓRIO LOCAL, ADICIONA COOMO UM REMOTO O LINK PARA O UPSTREAM;
+
+4 - FAÇA O PULL DO UPSTREAM PARA O REPOSITÓRIO LOCAL;
+
+5 - FAÇA O PUSH PARA O SEU FORK.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+CONSULTANDO REPOSITÓRIOS REMOTOS DO NOSSO PROJETO
+-------------------------------------------------------------------------------
+Comando: git remote -v
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+COMANDO PARA SINCRONIA ENTRE UPSTREAM E FORK
+-------------------------------------------------------------------------------
+Comando: git remote -v
+-------------------------------------------------------------------------------
+1 - git clone (URL do FORK);
+    EXEMPLO: git clone https://githubcom/usr_B/projeto
+
+2 - git remote add [nome repositório remoto(padrão é UPSTREAM)] [URL UPSTREAM]
+    EXEMPLO: git remote add upstream https://githubcom/usr_A/projeto
+
+3  - git pull [nome repositório] [nome branch]
+    EXEMPLO: git pull upstream master
+
+4 - git push
+-------------------------------------------------------------------------------
