@@ -1,0 +1,127 @@
+*=============================================================================*
+PARA QUE SERVE O COMANDO REBASE
+===============================================================================
+*-----------------------------------------------------------------------------*
+MOTIVAÇÃO DO REBASE
+-------------------------------------------------------------------------------
+O comando REBASE é usado para trabalharmos no PROJECT HISTORY do nosso projeto,
+e com ele temos as seguintes funcionalidades:
+
+    - Modificar o PROJECT HISTORY
+
+    - Alterar a ordem dos commits
+
+    - Unir commits
+
+    - Modificar mensagem dos commits
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REBASE VS MERGE
+-------------------------------------------------------------------------------
+Tanto o REBASE quanto o MERGE são utilizados para integrarmos alterações de uma
+BRANCH em outra
+
+- Vantagens e Desvantagens do MERGE:
+    + MERGE não altera (destrói) a linha do tempo de uma branch.
+    - O MERGE pode poluir a linha do tempo de uma branch.
+
+- Vantagens e Desvantagens do REBASE:
+    + Permite manter um histórico limpo.
+    - Altera todo o PROJECT HISTORY, logo, use-o com atenção em branchs compar-
+      tilhadas.
+    - Por padrão, não faça REBASE em branches públicas!
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+CONTROLE DE BRANCHES COM REBASE
+-------------------------------------------------------------------------------
+Fluxo do MERGE:
+
+==*FIRST_COMMIT*==========*ADD_TITULO*=====*MERGE*===========[MASTER]
+                 \                           /
+                  \==*ADD_TEXTO*============/==[NOVA_BRANCH]
+
+- O commit de merge não tem função nenhuma no histórico, a não ser exibir que
+  nesse momento um MERGE entre duas branches.
+
+- Se for o caso desse commit de MERGE não trazer nenuma significância pro 
+  PROJECT HISTORY, podemos usar o comando REBASE, o qual vai realocoar todos os
+  commits da nossa branch e colocá-los em uma área temporária, e em seguida, o 
+  pai dessa branch será realocado para frente de todos os commits da branch 
+  MASTER, de modo que ocorra um "merge fast-forward", não havendo deste modo o
+  commit de merge no PROJECT HISTORY.
+
+EXEMPLIFICANDO O REBASE:
+
+MOMENTO 1:
+
+==*FIRST_COMMIT*==========*ADD_TITULO*================[MASTER]
+                 \                           
+                  \==*ADD_TEXTO*=======[NOVA_BRANCH]
+
+MOMENTO 2:
+
+==*FIRST_COMMIT*=====*ADD_TITULO*================[MASTER]
+                                    \                           
+                                     \==*ADD_TEXTO*=======[NOVA_BRANCH]
+
+MOMENTO 3 (EFETUANDO O MERGE):
+
+==*FIRST_COMMIT*=====*ADD_TITULO*======*ADD_TEXTO*==========[MASTER]
+
+- Como resultado, temos que esses commits recebem novos hashes após a realoca-
+  ção dos destes, por isso deve-se ter muita cautela ao realizarmos o REBASE,
+  pois os commits são refeitos, de modo que ao efetuarmos esse comando em 
+  branches públicas, estaremos destruindo o histórico do nosso projeto.
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REALIZANDO REBASE
+-------------------------------------------------------------------------------
+Antes de tudo, vá pra branch que vc quer realizar a integração de commits 
+(diferente do processo de MERGE, no qual vamos pra branch master para darmos os
+comandos de merge).
+
+- Sequência do REBASE:
+    1. git checkout [branch]
+    2. git rebase master
+    3. git checkout master
+    4. git merge [branch] 
+
+Após o rebase, o histórico da branch alvo do REBASE será modificado
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REBASE E CONFLITOS
+-------------------------------------------------------------------------------
+Diferenemente do processo de MERGE no qual precisamos fazer um commit para re-
+solvermos o conflito, com o REBASE esse processo é automático:
+
+- Sequência para resolver conflitos (REBASE)
+    1. git checkout [branch]
+    2. git rebase master (o REBASE fica pausado para resolvermos o conflito)
+    3. git add .
+    4. git rebase --continue
+    5. git checout master
+    6. git merge [branch]
+
+-> rebase --skip: Usa a versão da master como a final, sem pedir pela nossa
+                  intervenção para resolver o conflito.
+
+-> rebase --abort: Cancela o processo de rebase. 
+-------------------------------------------------------------------------------
+
+*-----------------------------------------------------------------------------*
+REBASE ITERATIVO (rebase -i)
+-------------------------------------------------------------------------------
+    Esta opção nos permite mover, editar, juntar commits, etc., de modo a mudarmos
+o nosso PROJECT HISTORY.
+    Ao realizarmos o REBASE ITERATIVO, o projeto inteiro é reogarnizado, como se
+todos os commits tivessem ocorrido na branch master.
+
+    IMPORTANTE: SÓ REALIZE ESTE COMANDO EM BRANCHES LOCAIS!
+
+- SEMPRE USE O REBASE ITERATIVO À PARTIR DO PAI DO COMMIT ALVO:
+    git rebase -i [hash do commit pai do commit alvo]
+-------------------------------------------------------------------------------
